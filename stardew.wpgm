@@ -1,0 +1,10 @@
+//importar archivos
+import wollok.game.*
+//no anda la imagen!!!!!!
+program StardewGame {
+    game.title("Stardew Magic")
+    game.height(20)
+    game.width(20)
+    game.boardGround("MapaDia.png")
+    game.start()
+}
