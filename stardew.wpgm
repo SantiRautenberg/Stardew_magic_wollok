@@ -1,10 +1,22 @@
 //importar archivos
 import wollok.game.*
-//no anda la imagen!!!!!!
+import personaje.*
+
 program StardewGame {
     game.title("Stardew Magic")
+    game.cellSize(48)          // los sprites miden 48x48 px
     game.height(20)
     game.width(20)
-    game.boardGround("MapaDia.png")
+    game.boardGround("MapaDia.png")   // esta en assets/MapaDia.png
+
+    game.addVisual(personaje)
+    personaje.iniciar()
+
+    // movimiento con W A S D
+    keyboard.w().onPressDo { personaje.mover("arriba") }
+    keyboard.a().onPressDo { personaje.mover("izquierda") }
+    keyboard.s().onPressDo { personaje.mover("abajo") }
+    keyboard.d().onPressDo { personaje.mover("derecha") }
+
     game.start()
 }

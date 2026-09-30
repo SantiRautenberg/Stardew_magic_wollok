@@ -23,3 +23,37 @@
 {"level":"info","message":"⌛ Validating stardew.wpgm","timeElapsed":222,"timestamp":"2026-09-29T23:20:03.952Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/home/agus/Documentos/algo1Unsam/tpGame/Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":434,"timestamp":"2026-09-29T23:20:08.115Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/home/agus/Documentos/algo1Unsam/tpGame/Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":503,"timestamp":"2026-09-29T23:22:42.907Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":114,"timestamp":"2026-09-30T15:17:11.633Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":146,"timestamp":"2026-09-30T15:17:47.514Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":119,"timestamp":"2026-09-30T15:17:47.637Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":141,"timestamp":"2026-09-30T15:17:47.902Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":116,"timestamp":"2026-09-30T15:17:48.250Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":153,"timestamp":"2026-09-30T15:17:49.181Z"}
+{"level":"info","message":"⌛ Validating stardew.wpgm","timeElapsed":164,"timestamp":"2026-09-30T15:17:49.470Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":104,"timestamp":"2026-09-30T15:17:50.370Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":101,"timestamp":"2026-09-30T15:18:45.040Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_abajo_1.png","timestamp":"2026-09-30T15:18:45.237Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_abajo_2.png","timestamp":"2026-09-30T15:18:46.456Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":104,"timestamp":"2026-09-30T15:18:48.412Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_abajo_3.png","timestamp":"2026-09-30T15:18:48.572Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_abajo_4.png","timestamp":"2026-09-30T15:18:49.781Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_arriba_1.png","timestamp":"2026-09-30T15:18:50.804Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_arriba_2.png","timestamp":"2026-09-30T15:18:51.952Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_arriba_3.png","timestamp":"2026-09-30T15:18:54.051Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_arriba_4.png","timestamp":"2026-09-30T15:18:55.188Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_derecha_1.png","timestamp":"2026-09-30T15:18:56.380Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_derecha_2.png","timestamp":"2026-09-30T15:18:57.487Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":102,"timestamp":"2026-09-30T15:18:58.486Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_derecha_3.png","timestamp":"2026-09-30T15:18:58.637Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":106,"timestamp":"2026-09-30T15:18:59.517Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_derecha_4.png","timestamp":"2026-09-30T15:18:59.677Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_izquierda_1.png","timestamp":"2026-09-30T15:19:00.744Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_izquierda_2.png","timestamp":"2026-09-30T15:19:02.234Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_izquierda_3.png","timestamp":"2026-09-30T15:19:03.530Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":165,"timestamp":"2026-09-30T15:19:04.708Z"}
+{"level":"info","message":"Removing diagnostics from /C:/Users/lauja/Downloads/Stardew_magic_wollok/Stardew_magic_wollok/assets/caminar_izquierda_4.png","timestamp":"2026-09-30T15:19:04.861Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":111,"timestamp":"2026-09-30T15:20:26.889Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":127,"timestamp":"2026-09-30T15:20:27.016Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":424,"timestamp":"2026-09-30T15:20:40.018Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed stardew.StardewGame on c:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok","timeElapsed":189140,"timestamp":"2026-09-30T15:23:48.734Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":331,"timestamp":"2026-09-30T15:23:51.496Z"}
