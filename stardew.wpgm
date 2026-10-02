@@ -13,8 +13,8 @@ program StardewGame {
     game.width(20)
     game.boardGround("MapaDia.gif")   // esta en assets/MapaDia.png
 
-    game.addVisual(personaje)
-    personaje.iniciar()
+    //game.addVisual(personaje)
+    //personaje.iniciar()
     
     const lacasa = new casa()
     game.addVisual(lacasa)
@@ -48,12 +48,14 @@ program StardewGame {
     //============FIN OBSTACULOS=================
 
     
+    game.addVisual(principal)
+    principal.iniciarAnimacion()
 
     // movimiento con W A S D
-    keyboard.w().onPressDo { personaje.mover("arriba") }
-    keyboard.a().onPressDo { personaje.mover("izquierda") }
-    keyboard.s().onPressDo { personaje.mover("abajo") }
-    keyboard.d().onPressDo { personaje.mover("derecha") }
+    keyboard.w().onPressDo { principal.mover("arriba") }
+    keyboard.a().onPressDo { principal.mover("izquierda") }
+    keyboard.s().onPressDo { principal.mover("abajo") }
+    keyboard.d().onPressDo { principal.mover("derecha") }
 
     game.start()
 }
