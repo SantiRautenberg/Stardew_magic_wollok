@@ -3,6 +3,9 @@ import wollok.game.*
 import personaje.*
 import malesas.*
 import mapa.*
+import plantas.*
+import ciclo.*
+
 
 
 
@@ -57,5 +60,26 @@ program StardewGame {
     keyboard.s().onPressDo { principal.mover("abajo") }
     keyboard.d().onPressDo { principal.mover("derecha") }
 
+    // TECLAS PARA PLANTAR
+    keyboard.l().onPressDo {
+       principal.plantar(new PlantaLunar(position = principal.position))
+    }
+    keyboard.g().onPressDo {
+       principal.plantar(new Girasol(position = principal.position)) 
+    }
+    keyboard.r().onPressDo {
+       principal.plantar(new RosaMagica(position = principal.position)) 
+    }
+    keyboard.h().onPressDo {
+       principal.plantar(new Hongo(position = principal.position)) 
+    }
+    keyboard.m().onPressDo {
+      principal.plantar(new Mandragora(position = principal.position))
+    }
+
     game.start()
+
+
+    game.onTick(15000, "ciclo", {ciclo.cambiarCiclo()})
 }
+

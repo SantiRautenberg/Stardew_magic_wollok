@@ -3,7 +3,7 @@ import wollok.game.*
 // las piedras se levantan y los arboles dan palos al talarlos
 // las malesas nada
 
-class obstaculos {
+class Obstaculos {
     var property position  
     var property cantidadDeRecursos = 1
 
@@ -14,18 +14,18 @@ class obstaculos {
 }
 
 
-class piedra inherits obstaculos {
+class piedra inherits Obstaculos {
     method image() = 'piedra.png'
 }
 
-class tronco inherits obstaculos {
+class tronco inherits Obstaculos {
   method image() = 'tronco.png' 
 }
 
-class malesa inherits obstaculos {
+class malesa inherits Obstaculos {
     method image() = 'malesa.png'
 }
 
-class arbol inherits obstaculos {
+class arbol inherits Obstaculos {
   method image() =  'arbol.png'
 }

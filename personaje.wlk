@@ -27,6 +27,7 @@ class Personaje {
     var property hambre = 0
     var property dinero = 0
     const property inventario = new Inventario() 
+    const plantas = []
 
     method dormir() {
         energia = 100
@@ -64,6 +65,11 @@ class Personaje {
         } else {
             self.error("No tenes suficiente dinero.")
         }
+    }
+
+    method plantar(planta) {
+      plantas.add(planta)
+      game.addVisual(planta)
     }
 }
 
