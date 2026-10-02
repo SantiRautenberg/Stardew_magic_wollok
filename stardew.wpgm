@@ -1,16 +1,53 @@
 //importar archivos
 import wollok.game.*
 import personaje.*
+import malesas.*
+import mapa.*
+
+
 
 program StardewGame {
     game.title("Stardew Magic")
     game.cellSize(48)          // los sprites miden 48x48 px
     game.height(20)
     game.width(20)
-    game.boardGround("MapaDia.png")   // esta en assets/MapaDia.png
+    game.boardGround("MapaDia.gif")   // esta en assets/MapaDia.png
 
     game.addVisual(personaje)
     personaje.iniciar()
+    
+    const lacasa = new casa()
+    game.addVisual(lacasa)
+    
+
+    //==========posicion de objetos============
+    //isntancio las piedras en el mapa
+    const posicionPiedras = [game.at(2, 6),game.at(14, 3),game.at(15, 12)]
+    posicionPiedras.forEach({posicion => 
+    const nuevaPiedra = new piedra(position = posicion)
+    game.addVisual(nuevaPiedra)})
+
+    //instancio los arboles en el mapa
+    const posicionArboles = [game.at(3, 10),game.at(13, 9),game.at(17,3)]
+    posicionArboles.forEach({posicion =>
+    const nuevoArbol = new arbol (position = posicion)
+    game.addVisual(nuevoArbol)})
+
+    // isntancio los troncos en el mapa
+    const posicionTroncos = [game.at(7, 6),game.at(4, 17),game.at(13,17)]
+    posicionTroncos.forEach({posicion =>
+    const nuevoTronco = new tronco (position = posicion)
+    game.addVisual(nuevoTronco)})
+
+   // isntancio la malesa en el mapa
+    const posicionMalesas = [game.at(6, 8),game.at(12, 5),game.at(17,17),game.at(3,3),game.at(13, 15)]
+    posicionMalesas.forEach({posicion =>
+    const nuevaMalesa = new malesa (position = posicion)
+    game.addVisual(nuevaMalesa)})
+
+    //============FIN OBSTACULOS=================
+
+    
 
     // movimiento con W A S D
     keyboard.w().onPressDo { personaje.mover("arriba") }
