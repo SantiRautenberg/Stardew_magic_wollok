@@ -1,31 +1,51 @@
 import wollok.game.*
-// Aca van las malezas (todavia sin implementar).
+import mapa.*
+
+// Aca van los obstaculos del mapa.
 // las piedras se levantan y los arboles dan palos al talarlos
 // las malesas nada
 
+/**
+ * Cosas que hay en el mapa y estorban. Todo obstaculo se registra en el `mapa`
+ * al crearse para que el personaje no pueda atravesarlo.
+ */
 class Obstaculos {
-    var property position  
+    var property position
     var property cantidadDeRecursos = 1
 
+    //method image()
+    //method SePuedeQuitar()
+    //method loot()
 
-    //method image() 
-    //method SePuedeQuitar() 
-    //method loot()  
+    method inicializar() {
+        mapa.registrar(self)
+    }
+
+    /** Celdas que bloquean el paso. Por defecto, solo la celda donde esta. */
+    method ocupa(posicion) = posicion == position
 }
 
-
-class piedra inherits Obstaculos {
+class Piedra inherits Obstaculos {
     method image() = 'piedra.png'
 }
 
-class tronco inherits Obstaculos {
-  method image() = 'tronco.png' 
+/** El tronco ocupa 2 celdas de ancho. */
+class Tronco inherits Obstaculos {
+    method image() = 'tronco.png'
+
+    override method ocupa(posicion) = posicion == position || posicion == position.right(1)
 }
 
-class malesa inherits Obstaculos {
+/** Las malesas se pueden pisar, por eso no bloquean ninguna celda. */
+class Malesa inherits Obstaculos {
     method image() = 'malesa.png'
+
+    override method ocupa(posicion) = false
 }
 
-class arbol inherits Obstaculos {
-  method image() =  'arbol.png'
+/** El arbol mide 3 x 4 celdas, pero solo bloquea su tronco (celda de abajo, al medio). */
+class Arbol inherits Obstaculos {
+    method image() = 'arbol.png'
+
+    override method ocupa(posicion) = posicion == position.right(1)
 }

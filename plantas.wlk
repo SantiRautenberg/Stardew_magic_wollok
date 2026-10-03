@@ -2,7 +2,10 @@
 import wollok.game.*
 import ciclo.*
 
-
+/**
+ * Planta que se siembra, se riega y crece cuando cumple sus condiciones.
+ * Cada tipo de planta redefine `puedeCrecer()` y sus imagenes.
+ */
 class Plantas {
     var property position
     var nRiegos = 0
@@ -63,7 +66,7 @@ class RosaMagica inherits Plantas {//hay que regarla solo una vez y crece de noc
     }
 
     override method imagenBrote () = "brote.png"
-    override method imagenCosechada () = "rosamagica.png"
+    override method imagenCosechada () = "rosa.png"
     
 }
 
