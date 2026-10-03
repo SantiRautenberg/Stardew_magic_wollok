@@ -1,8 +1,10 @@
 import wollok.game.*
 import mapa.*
+import herramientas.*
 
 
 //podemos hacerlo clase o objeto , si lo hacemos clase despues cada personaje va a tener su propio inventario
+/** Lista de cosas que lleva un personaje. */
 class Inventario {
     const items = []
     method add(elemento) {
@@ -20,6 +22,7 @@ class Inventario {
 }
 
 
+/** Lo que tienen en comun todos los personajes: estadisticas, inventario y acciones basicas. */
 class Personaje {
     var property nombre = ""
     var property vida = 100
@@ -73,43 +76,105 @@ class Personaje {
     }
 }
 
+/** El mago que maneja el jugador: se mueve con WASD y puede llevar una herramienta. */
 object principal inherits Personaje {
-    
-    var property position = game.at(10, 10)
-    var mirando = "abajo"          // abajo | arriba | izquierda | derecha
+
+    // --- posicion y direccion (abajo | arriba | izquierda | derecha) ---
+    var property position = game.at(11, 7)      // debajo de la puerta de la casa
+    var mirando = "abajo"
+
+    // --- animacion de caminata ---
+    const esperaEntrePasos = 120                // ms minimos entre un paso y otro
+    const framesDeCaminata = 4
     var caminando = false
     var frame = 1
     var ultimoMovimiento = 0
 
-    method image() =
-        if (caminando) "caminar_" + mirando + "_" + frame + ".png"
-        else "caminar_" + mirando + "_1.png"
+    // --- herramienta en la mano (hacha | pala | azada | sinHerramienta) ---
+    const framesDeUso = 6
+    var property herramienta = sinHerramienta
+    var usando = false
+    var frameUso = 1
 
+    method image() =
+        if (usando) herramienta.imagenUsando(mirando, frameUso)
+        else if (caminando) herramienta.imagenCaminando(mirando, frame)
+        else herramienta.imagenQuieto(mirando)
+
+    // ---------- animacion ----------
     method iniciarAnimacion() {
-        game.onTick(100, "personajeQuieto", {
-            if (caminando && game.currentTime() - ultimoMovimiento > 220) {
-                caminando = false
-                frame = 1
-            }
-        })
+        game.onTick(100, "personajeQuieto", { self.actualizarAnimacion() })
     }
 
+    method actualizarAnimacion() {
+        if (usando) {
+            self.avanzarUso()
+        } else {
+            self.frenarSiDejoDeCaminar()
+        }
+    }
+
+    method avanzarUso() {
+        if (frameUso < framesDeUso) {
+            frameUso += 1
+        } else {
+            usando = false
+            frameUso = 1
+        }
+    }
+
+    method frenarSiDejoDeCaminar() {
+        if (caminando && game.currentTime() - ultimoMovimiento > 220) {
+            caminando = false
+            frame = 1
+        }
+    }
+
+    // ---------- movimiento ----------
     method destino(dir) =
         if (dir == "derecha") position.right(1)
         else if (dir == "izquierda") position.left(1)
         else if (dir == "arriba") position.up(1)
         else position.down(1)
 
+    method puedeMoverse() = !usando && game.currentTime() - ultimoMovimiento >= esperaEntrePasos
+
     method mover(dir) {
-        if (game.currentTime() - ultimoMovimiento >= 120) {
+        if (self.puedeMoverse()) {
             mirando = dir
-            const nuevaPosicion = self.destino(dir)
-            if (mapa.contiene(nuevaPosicion)) {
-                position = nuevaPosicion
-            }
+            self.irA(self.destino(dir))
             caminando = true
-            frame = if (frame == 4) 1 else frame + 1
+            frame = if (frame == framesDeCaminata) 1 else frame + 1
             ultimoMovimiento = game.currentTime()
+        }
+    }
+
+    /** Solo avanza si la celda esta dentro del mapa y no la bloquea nada. */
+    method irA(nuevaPosicion) {
+        if (mapa.estaLibre(nuevaPosicion)) {
+            position = nuevaPosicion
+        }
+    }
+
+    // ---------- herramientas ----------
+    method equipar(unaHerramienta) {
+        if (!usando) {
+            herramienta = unaHerramienta
+            caminando = false
+            frame = 1
+        }
+    }
+
+    method guardarHerramienta() {
+        self.equipar(sinHerramienta)
+    }
+
+    /** Reproduce la animacion de talar / cavar / arar (todavia no modifica el mapa). */
+    method usarHerramienta() {
+        if (herramienta.sePuedeUsar() && !usando) {
+            usando = true
+            frameUso = 1
+            caminando = false
         }
     }
 

@@ -63,3 +63,64 @@
 {"exitCode":"SIGINT","level":"info","message":"👾 Game executed stardew.StardewGame on /home/agus/Documentos/algo1Unsam/tpGame/Stardew_magic_wollok","timeElapsed":60797,"timestamp":"2026-10-01T21:42:17.508Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/home/agus/Documentos/algo1Unsam/tpGame/Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":998,"timestamp":"2026-10-01T21:42:58.153Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/Users/cande/Desktop/Este cuatri/Algoritmos I/tpgame/Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":172,"timestamp":"2026-10-02T19:26:24.895Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":116,"timestamp":"2026-10-03T13:28:07.634Z"}
+{"level":"info","message":"⌛ Validating herramientas.wlk","timeElapsed":112,"timestamp":"2026-10-03T13:28:38.932Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":119,"timestamp":"2026-10-03T13:28:43.918Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":117,"timestamp":"2026-10-03T13:28:50.329Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":109,"timestamp":"2026-10-03T13:28:50.439Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":134,"timestamp":"2026-10-03T13:29:02.245Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":132,"timestamp":"2026-10-03T13:29:02.381Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":115,"timestamp":"2026-10-03T13:29:18.660Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":132,"timestamp":"2026-10-03T13:33:11.496Z"}
+{"level":"info","message":"⌛ Validating ciclo.wlk","timeElapsed":149,"timestamp":"2026-10-03T13:33:11.653Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":117,"timestamp":"2026-10-03T13:33:23.102Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":105,"timestamp":"2026-10-03T13:34:03.022Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":105,"timestamp":"2026-10-03T13:34:03.239Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":110,"timestamp":"2026-10-03T13:34:03.445Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":110,"timestamp":"2026-10-03T13:34:03.767Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":115,"timestamp":"2026-10-03T13:34:46.024Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":117,"timestamp":"2026-10-03T13:34:46.187Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":131,"timestamp":"2026-10-03T13:35:29.222Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":108,"timestamp":"2026-10-03T13:35:30.265Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":113,"timestamp":"2026-10-03T13:36:52.652Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":143,"timestamp":"2026-10-03T13:37:06.875Z"}
+{"level":"info","message":"⌛ Validating herramientas.wlk","timeElapsed":104,"timestamp":"2026-10-03T13:38:03.474Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":151,"timestamp":"2026-10-03T13:38:10.924Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":136,"timestamp":"2026-10-03T13:38:11.062Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":113,"timestamp":"2026-10-03T13:38:11.175Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":512,"timestamp":"2026-10-03T13:38:13.348Z"}
+{"level":"info","message":"⌛ Validating herramientas.wlk","timeElapsed":102,"timestamp":"2026-10-03T13:49:14.490Z"}
+{"level":"info","message":"⌛ Validating ciclo.wlk","timeElapsed":151,"timestamp":"2026-10-03T13:49:16.166Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":103,"timestamp":"2026-10-03T13:49:16.950Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":196,"timestamp":"2026-10-03T13:49:17.908Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":133,"timestamp":"2026-10-03T13:49:18.456Z"}
+{"level":"info","message":"⌛ Validating plantas.wlk","timeElapsed":119,"timestamp":"2026-10-03T13:49:18.904Z"}
+{"level":"info","message":"⌛ Validating stardew.wpgm","timeElapsed":128,"timestamp":"2026-10-03T13:49:19.475Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed stardew.StardewGame on c:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok","timeElapsed":668267,"timestamp":"2026-10-03T13:49:21.106Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mstardew.StardewGame\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\lauja\\OneDrive\\Desktop\\Proyectos Wollok\\Stardew_magic_wollok\u001b[39m\u001b[23m","ok":true,"timeElapsed":567,"timestamp":"2026-10-03T13:49:23.893Z"}
+{"level":"info","message":"⌛ Validating herramientas.wlk","timeElapsed":110,"timestamp":"2026-10-03T13:50:20.206Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":121,"timestamp":"2026-10-03T13:50:31.346Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":112,"timestamp":"2026-10-03T13:54:50.974Z"}
+{"level":"info","message":"⌛ Validating plantas.wlk","timeElapsed":145,"timestamp":"2026-10-03T13:54:51.164Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":108,"timestamp":"2026-10-03T13:54:52.619Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":103,"timestamp":"2026-10-03T13:54:52.764Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":101,"timestamp":"2026-10-03T13:55:07.312Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":147,"timestamp":"2026-10-03T13:55:27.100Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":104,"timestamp":"2026-10-03T13:55:27.238Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":101,"timestamp":"2026-10-03T13:55:30.902Z"}
+{"level":"info","message":"⌛ Validating stardew.wpgm","timeElapsed":141,"timestamp":"2026-10-03T13:55:31.066Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":139,"timestamp":"2026-10-03T14:29:39.042Z"}
+{"level":"info","message":"⌛ Validating ciclo.wlk","timeElapsed":234,"timestamp":"2026-10-03T14:29:39.318Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":131,"timestamp":"2026-10-03T14:29:47.548Z"}
+{"level":"info","message":"⌛ Validating malesas.wlk","timeElapsed":298,"timestamp":"2026-10-03T14:29:47.872Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":117,"timestamp":"2026-10-03T14:29:57.202Z"}
+{"level":"info","message":"⌛ Validating mapa.wlk","timeElapsed":312,"timestamp":"2026-10-03T14:29:57.528Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":143,"timestamp":"2026-10-03T14:30:07.598Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":330,"timestamp":"2026-10-03T14:30:07.960Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":119,"timestamp":"2026-10-03T14:30:31.340Z"}
+{"level":"info","message":"⌛ Validating plantas.wlk","timeElapsed":224,"timestamp":"2026-10-03T14:30:31.580Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":128,"timestamp":"2026-10-03T14:30:33.791Z"}
+{"level":"info","message":"⌛ Validating stardew.wpgm","timeElapsed":226,"timestamp":"2026-10-03T14:30:34.056Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":125,"timestamp":"2026-10-03T14:30:34.434Z"}
+{"level":"info","message":"⌛ Validating plantas.wlk","timeElapsed":144,"timestamp":"2026-10-03T14:30:34.592Z"}
+{"errors":{"errors":[null,["/**\r","* Planta que se siembra, se riega y crece cuando cumple sus condiciones.\r","* Cada tipo de planta redefine `puedeCrecer()` y sus imagenes.\r"]]},"level":"error","message":"✘ Failed to get type description: Error: {\n  \"errors\": [\n    null,\n    [\n      \"/**\\r\",\n      \"* Planta que se siembra, se riega y crece cuando cumple sus condiciones.\\r\",\n      \"* Cada tipo de planta redefine `puedeCrecer()` y sus imagenes.\\r\"\n    ]\n  ]\n} {\n  \"errors\": [\n    null,\n    [\n      \"/**\\r\",\n      \"* Planta que se siembra, se riega y crece cuando cumple sus condiciones.\\r\",\n      \"* Cada tipo de planta redefine `puedeCrecer()` y sus imagenes.\\r\"\n    ]\n  ]\n}","stack":"Error: {\n  \"errors\": [\n    null,\n    [\n      \"/**\\r\",\n      \"* Planta que se siembra, se riega y crece cuando cumple sus condiciones.\\r\",\n      \"* Cada tipo de planta redefine `puedeCrecer()` y sus imagenes.\\r\"\n    ]\n  ]\n}\n    at lS (c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:64:34609)\n    at Q1 (c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:64:34682)\n    at c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:64:37949\n    at o.y1 (c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:57:59136)\n    at c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:64:37918\n    at c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:57:57176\n    at Dfn (c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:68:11324)\n    at c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:68:3629\n    at Ybn (c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:68:3396)\n    at c:\\Users\\lauja\\.vscode\\extensions\\uqbar.wollok-lsp-ide-0.5.5\\out\\server\\src\\server.js:2430:847","timestamp":"2026-10-03T14:33:38.985Z"}
