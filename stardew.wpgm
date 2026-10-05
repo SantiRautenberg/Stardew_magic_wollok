@@ -64,19 +64,25 @@ program StardewGame {
 
     // TECLAS PARA PLANTAR
     keyboard.l().onPressDo {
-       principal.plantar(new PlantaLunar(position = principal.position))
+       principal.plantar(new PlantaLunar(position = principal.position()))
     }
     keyboard.g().onPressDo {
-       principal.plantar(new Girasol(position = principal.position)) 
+       principal.plantar(new Girasol(position = principal.position())) 
     }
     keyboard.r().onPressDo {
-       principal.plantar(new RosaMagica(position = principal.position)) 
+       principal.plantar(new RosaMagica(position = principal.position())) 
     }
     keyboard.h().onPressDo {
-       principal.plantar(new Hongo(position = principal.position)) 
+       principal.plantar(new Hongo(position = principal.position())) 
     }
     keyboard.m().onPressDo {
-      principal.plantar(new Mandragora(position = principal.position))
+      principal.plantar(new Mandragora(position = principal.position()))
+    }
+    keyboard.x().onPressDo { //para poner una parcela de tierra
+      principal.ponerParcela()
+    }
+    keyboard.z().onPressDo{ //para regar
+      principal.regar()
     }
 
     // el dia y la noche se alternan cada 15 segundos

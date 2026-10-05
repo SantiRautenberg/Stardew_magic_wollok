@@ -1,3 +1,4 @@
+import plantas.*
 import wollok.game.*
 import mapa.*
 import herramientas.*
@@ -31,6 +32,7 @@ class Personaje {
     var property dinero = 0
     const property inventario = new Inventario() 
     const plantas = []
+    const parcelas = []
 
     method dormir() {
         energia = 100
@@ -70,10 +72,7 @@ class Personaje {
         }
     }
 
-    method plantar(planta) {
-      plantas.add(planta)
-      game.addVisual(planta)
-    }
+   
 }
 
 /** El mago que maneja el jugador: se mueve con WASD y puede llevar una herramienta. */
@@ -189,4 +188,30 @@ object principal inherits Personaje {
     method cosechar(planta) {
         //por paraemtro la planta a cosechar , un vez que la coseche se la guarda en el inventario?
     }
+
+     method parcelaActual() {
+      const parcela =  parcelas.find({parcela => parcela.position() == self.position()})
+
+      if(parcela == null) {
+        return sinParcela
+      } else {
+        return parcela
+      }
+    }
+
+    method ponerParcela() {
+      const parcela = new Parcela (position = self.position())
+      parcelas.add(parcela)
+      game.addVisual(parcela)
+    }
+
+    method plantar(planta) {
+      self.parcelaActual().sembrar(planta)
+    }
+
+    method regar() {
+      self.parcelaActual().regar()
+    }
+
+
 }
