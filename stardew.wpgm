@@ -1,7 +1,7 @@
 //importar archivos
 import wollok.game.*
 import personaje.*
-import malesas.*
+import objetos.*
 import mapa.*
 import plantas.*
 import ciclo.*
@@ -12,13 +12,14 @@ program StardewGame {
     game.cellSize(48)          // los sprites miden 48x48 px
     game.height(20)
     game.width(20)
-    game.boardGround("MapaDia.gif")   // esta en assets/MapaDia.gif
+    game.addVisual(fondo)   // esta en assets/MapaDia.gif
 
     const lacasa = new Casa()
     game.addVisual(lacasa)
     
 
     //==========posicion de objetos============
+    const ObstaculosMapa = []
     //instancio las piedras en el mapa
     const posicionPiedras = [game.at(2, 6),game.at(14, 3),game.at(15, 12)]
     posicionPiedras.forEach({posicion => 
@@ -29,12 +30,14 @@ program StardewGame {
     const posicionArboles = [game.at(3, 10),game.at(13, 9),game.at(17,3)]
     posicionArboles.forEach({posicion =>
     const nuevoArbol = new Arbol (position = posicion)
+    ObstaculosMapa.add(nuevoArbol)
     game.addVisual(nuevoArbol)})
 
     // instancio los troncos en el mapa
     const posicionTroncos = [game.at(7, 6),game.at(4, 17),game.at(13,17)]
     posicionTroncos.forEach({posicion =>
     const nuevoTronco = new Tronco (position = posicion)
+    ObstaculosMapa.add(nuevoTronco)
     game.addVisual(nuevoTronco)})
 
    // instancio las malesas en el mapa
@@ -43,11 +46,25 @@ program StardewGame {
     const nuevaMalesa = new Malesa (position = posicion)
     game.addVisual(nuevaMalesa)})
 
+    //colision con arboles, troncos y casa
+    principal.obs(ObstaculosMapa)
+    
+
     //============FIN OBSTACULOS=================
 
     
     game.addVisual(principal)
     principal.iniciarAnimacion()
+
+    // levantar objetos del piso con la la 'Q'
+    keyboard.q().onPressDo {
+    const objeto = principal.objetoEnMiPosicion()
+    principal.levantar(objeto)
+    }
+   keyboard.i().onPressDo {
+    const recursos = principal.inventario().items()
+    game.say(principal,recursos.map({ recurso => recurso.muestra() }).toString())
+   }
 
     // movimiento con W A S D
     keyboard.w().onPressDo { principal.mover("arriba") }

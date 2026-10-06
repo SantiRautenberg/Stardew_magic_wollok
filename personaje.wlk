@@ -2,24 +2,22 @@ import plantas.*
 import wollok.game.*
 import mapa.*
 import herramientas.*
+import objetos.*
 
 
 //podemos hacerlo clase o objeto , si lo hacemos clase despues cada personaje va a tener su propio inventario
 /** Lista de cosas que lleva un personaje. */
 class Inventario {
-    const items = []
+    var property items = []
+
     method add(elemento) {
-        items.add(elemento)
-    }
+        items.add(elemento)}
+
     method remove(elemento) {
-        items.remove(elemento)
-    }
+        items.remove(elemento)}
+
     method contains(elemento) {
-        return items.contains(elemento)
-    }
-    method items() {
-        return items
-    }
+        return items.contains(elemento)}
 }
 
 
@@ -77,6 +75,8 @@ class Personaje {
 
 /** El mago que maneja el jugador: se mueve con WASD y puede llevar una herramienta. */
 object principal inherits Personaje {
+ 
+    var property obs = []
 
     // --- posicion y direccion (abajo | arriba | izquierda | derecha) ---
     var property position = game.at(11, 7)      // debajo de la puerta de la casa
@@ -95,6 +95,10 @@ object principal inherits Personaje {
     var usando = false
     var frameUso = 1
 
+    method objetoEnMiPosicion() {
+    return game.getObjectsIn(position).find({ objeto => objeto != self })}
+
+                                                                        
     method image() =
         if (usando) herramienta.imagenUsando(mirando, frameUso)
         else if (caminando) herramienta.imagenCaminando(mirando, frame)
@@ -140,11 +144,13 @@ object principal inherits Personaje {
 
     method mover(dir) {
         if (self.puedeMoverse()) {
+            const ProximaDireccion = self.destino(dir)
             mirando = dir
+            if (!obs.any({obstaculo => obstaculo.position() == ProximaDireccion})){
             self.irA(self.destino(dir))
             caminando = true
             frame = if (frame == framesDeCaminata) 1 else frame + 1
-            ultimoMovimiento = game.currentTime()
+            ultimoMovimiento = game.currentTime()}
         }
     }
 
@@ -187,6 +193,10 @@ object principal inherits Personaje {
 
     method cosechar(planta) {
         //por paraemtro la planta a cosechar , un vez que la coseche se la guarda en el inventario?
+    }
+    method levantar(objeto) {
+    inventario.add(objeto.recurso())
+    game.removeVisual(objeto)
     }
 
      method parcelaActual() {
