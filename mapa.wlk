@@ -1,4 +1,6 @@
 import wollok.game.*
+import ciclo.*
+
 
 /**
  * Tablero del juego: conoce sus limites y que celdas estan ocupadas.
@@ -38,7 +40,11 @@ class Casa {
         mapa.registrar(self)
     }
 
-    method image() = 'casa.png'
+    method image() =
+        if(ciclo.esDia()) 'casa.png'
+        else 'casanoche.gif'
+
+        
     method position() = game.at(8, 8)
 
     method ocupa(posicion) =

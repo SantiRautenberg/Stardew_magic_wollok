@@ -17,6 +17,7 @@ class Obstaculos {
     //method SePuedeQuitar()
     //method loot()
 
+    
     method inicializar() {
         mapa.registrar(self)
     }
@@ -25,8 +26,22 @@ class Obstaculos {
     method ocupa(posicion) = posicion == position
 }
 
+class Recursos {
+    var property nombre      = ''
+    var property cantidad    = 0
+
+    method sumRecurso(unidades) {
+        cantidad += unidades
+    }
+
+    method muestra() {
+        return nombre + ": " + cantidad
+    }
+}
+
 class Piedra inherits Obstaculos {
     method image() = 'piedra.png'
+    method recurso() = new Recursos(nombre = 'piedra',cantidad = 1)
 }
 
 /** El tronco ocupa 2 celdas de ancho. */
@@ -39,7 +54,6 @@ class Tronco inherits Obstaculos {
 /** Las malesas se pueden pisar, por eso no bloquean ninguna celda. */
 class Malesa inherits Obstaculos {
     method image() = 'malesa.png'
-
     override method ocupa(posicion) = false
 }
 
