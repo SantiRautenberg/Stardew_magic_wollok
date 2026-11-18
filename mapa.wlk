@@ -1,14 +1,18 @@
 import wollok.game.*
 import ciclo.*
+import objetos.*
+import personaje.*
 
-
-/**
- * Tablero del juego: conoce sus limites y que celdas estan ocupadas.
- * Los elementos que bloquean el paso (casa, piedras, arboles...) se registran
- * solos al crearse, y cada uno responde con `ocupa(posicion)` que celdas pisa.
- */
 object mapa {
-    const solidos = []
+    var property solidos = []
+
+    //====== metodo de consulta para talar =========
+    method hayArbolEn(posicion) = solidos.any({ solido => solido.ocupa(posicion) && solido.esTalable()})    //devuelve true si hay un solido talable en la posicion
+    method arbolEn(posicion) = solidos.find({ solido => solido.ocupa(posicion) && solido.esTalable() })     //devuelve el solido que hay en la posicion
+
+    // metodo para saber si hay un mineral (esto debe ir en un mapa específico de la mina)
+    method hayMineralEn(posicion) = solidos.any({ solido => solido.ocupa(posicion) && solido.esMinable() })
+    method mineralEn(posicion) = solidos.find({ solido => solido.ocupa(posicion) && solido.esMinable() })
 
     method contiene(posicion) =
         posicion.x() >= 0 && posicion.x() < game.width() &&
@@ -18,7 +22,6 @@ object mapa {
         solidos.add(elemento)
     }
 
-    /** Lo saca del juego y deja de bloquear (para cuando se tala, se levanta, etc.). */
     method quitar(elemento) {
         solidos.remove(elemento)
         if (game.hasVisual(elemento)) {
@@ -26,19 +29,18 @@ object mapa {
         }
     }
 
-    /** El personaje solo puede pisar celdas que esten dentro del tablero y sin solidos. */
     method estaLibre(posicion) =
         self.contiene(posicion) && !solidos.any({ solido => solido.ocupa(posicion) })
 }
 
-/** La casa mide 6 x 7 celdas (288 x 336 px) y bloquea todo ese rectangulo. */
 class Casa {
-    const ancho = 6
-    const alto = 7
+    const ancho = 5
+    const alto = 4
 
-    method inicializar() {
-        mapa.registrar(self)
-    }
+    method EsSolido() = false
+    method esTalable() = false
+    method esMinable() = false
+    
 
     method image() =
         if(ciclo.esDia()) 'casa.png'

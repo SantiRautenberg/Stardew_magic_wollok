@@ -1,11 +1,6 @@
-/**
- * Herramientas que puede llevar el mago en la mano.
- *
- * Cada herramienta sabe cual es la imagen del personaje en cada situacion
- * (quieto, caminando y usandola), asi `principal` no necesita preguntar
- * "que herramienta tengo?" con ifs: le pide la imagen a la que tenga equipada
- * (polimorfismo).                         (icono para el inventario)
- */
+import personaje.*
+import mercado.*
+
 class Herramienta {
     const property nombre
 
@@ -14,18 +9,52 @@ class Herramienta {
     method imagenUsando(direccion, frame) = nombre + "_usar_" + direccion + "_" + frame + ".png"
     method icono() = nombre + ".png"
     method sePuedeUsar() = true
+    method usar(personaje) {}
 }
 
-object hacha inherits Herramienta(nombre = "hacha") { }
+object hacha inherits Herramienta(nombre = "hacha") {
+    var property mejorada = false
 
-object pala inherits Herramienta(nombre = "pala") { }
+    method mejorar() {
+        mejorada = true
+    }
+        override method usar(personaje) {          
+        personaje.intentarTalar()                  
+    }
+ }
 
-object azada inherits Herramienta(nombre = "azada") { }
+object pico inherits Herramienta(nombre = "pico") {
+    var property mejorado = false
 
-/** Cuando el mago no lleva nada usa las imagenes "caminar_*" (con su baston). */
+    override method usar(personaje) {
+        personaje.minar()
+    }
+
+    method mejorar() {
+        mejorado = true
+    }
+
+    method costoMinar(costoEnergia) =
+        if (mejorado) costoEnergia * 0.75
+        else costoEnergia
+}
+object azada inherits Herramienta(nombre = "azada") {
+    var property mejorada = false
+
+    method mejorar() {
+        mejorada = true
+    }
+    override method usar(personaje) {   
+        personaje.ponerParcela()        
+    }
+ }
+
 object sinHerramienta {
     method imagenQuieto(direccion) = "caminar_" + direccion + "_1.png"
     method imagenCaminando(direccion, frame) = "caminar_" + direccion + "_" + frame + ".png"
     method imagenUsando(direccion, frame) = self.imagenQuieto(direccion)
-    method sePuedeUsar() = false
+    method sePuedeUsar() = true
+    method usar(personaje) {
+        personaje.atacar() 
+    }
 }

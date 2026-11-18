@@ -1,0 +1,137 @@
+import personaje.*
+import mineria.*
+import inventario.*
+import ciclo.*
+import objetos.*
+import combate.*
+import herramientas.*
+import recetas.*
+import energia.*
+import plantas.*
+import mapa.*
+
+
+
+describe "Tests de la casa y descanso del personaje" {
+
+    test "Si es de noche y el personaje entra a la casa, recupera su energia al maximo" {
+        const miCasa = new Casa()
+        game.addVisual(miCasa)
+        game.addVisual(principal)
+        principal.casa(miCasa)
+        ciclo.esDia(false)
+        principal.gastarEnergia(80)
+        
+        // Simulamos que el personaje se para adentro de la casa (en 8,8)
+        principal.position(game.at(8, 8))
+        principal.ingresarAcasa(principal.position())
+        assert.equals(100, principal.energia())
+    }
+
+    test "Si es de dia y el personaje entra a la casa, no recarga energia" {
+        const miCasa = new Casa()
+        principal.casa(miCasa)
+        game.addVisual(miCasa)
+        
+        principal.position(game.at(8, 8))
+        ciclo.esDia(true)// Simulamos que es de día
+        principal.gastarEnergia(60)
+        var energiaAntes = principal.energia()
+        principal.ingresarAcasa(principal.position())
+        assert.equals(energiaAntes, principal.energia())
+    }
+
+    test "El personaje sabe perfectamente cuando esta dentro o fuera de la casa" {
+        const miCasa = new Casa() // Ubicada en game.at(8, 8)
+        principal.casa(miCasa)
+        assert.that(principal.estaEnCasa(game.at(9, 9)))
+        assert.notThat(principal.estaEnCasa(game.at(2, 2)))
+    }
+
+    test "Si la casa no esta agregada al juego (como en la mina), el personaje no activa la logica de la casa" {
+        const miCasa = new Casa()
+        principal.casa(miCasa)
+        game.addVisual(miCasa)
+        
+        principal.position(game.at(8, 8)) // Mismas coordenadas, pero sin la casa en pantalla
+        ciclo.esDia(false)
+        principal.gastarEnergia(70)
+        const energiaAntes = principal.energia()
+        principal.ingresarAcasa(principal.position())
+        
+        // Como la casa no está visualmente en este mapa, la energía no debe recargarse automáticamente por pasar por ahí
+        assert.equals(energiaAntes, principal.energia())
+    }
+}
+
+test "El personaje tala un arbol y este es removido del mapa" {
+    const arbol = new Arbol(position = game.at(5, 5))
+    game.addVisual(arbol)
+    mapa.registrar(arbol) // O como registres los sólidos
+    
+    // El personaje se para al lado o encima y usa el hacha
+    principal.position(game.at(5, 4))
+    principal.talar(arbol) // O el método que usen para interactuar
+    
+    // Verificamos que el árbol ya no sea un sólido o que haya sido removido
+    assert.notThat(mapa.hayArbolEn(game.at(5, 5)))
+}
+
+describe "test de plantas"{
+test "Un Girasol crece y se pone cosechable si es regado durante el dia" {
+    // Simulamos que es de día
+    ciclo.esDia(true)
+    
+    // Creamos una parcela y un girasol en ella
+    const parcela = new Parcela(position = game.at(2, 2))
+    const girasol = new Girasol(position = game.at(2, 2))
+    
+    parcela.sembrar(girasol)
+    
+    // Verificamos que arranca sin estar cosechable
+    assert.notThat(girasol.estaCosechable())
+    
+    // Lo regamos (lo que invoca su crecimiento)
+    parcela.regar()
+    
+    // Verificamos que ahora sí está cosechable
+    assert.that(girasol.estaCosechable())
+}
+
+test "Un Girasol NO crece si se intenta regar de noche" {
+    // Simulamos que es de noche
+    ciclo.esDia(false)
+    
+    const parcela = new Parcela(position = game.at(3, 3))
+    const girasol = new Girasol(position = game.at(3, 3))
+    
+    parcela.sembrar(girasol)
+    
+    // Lo regamos de noche
+    parcela.regar()
+    
+    // Como el ciclo no es adecuado (es de noche), no debe haberse vuelto cosechable
+    assert.notThat(girasol.estaCosechable())
+}
+
+test "Un Hongo necesita tres riegos para ponerse cosechable" {
+    const parcela = new Parcela(position = game.at(4, 4))
+    const hongo = new Hongo(position = game.at(4, 4))
+    
+    parcela.sembrar(hongo)
+    
+    // Primer riego
+    parcela.regar()
+    assert.notThat(hongo.estaCosechable())
+    // Segundo riego
+    parcela.regar()
+    assert.notThat(hongo.estaCosechable())
+    // Tercer riego
+    parcela.regar()
+    
+    // Ahora sí debería estar cosechable
+    assert.that(hongo.estaCosechable())
+}
+}
+
+

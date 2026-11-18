@@ -18,9 +18,23 @@ object ciclo{
 }
 
     object fondo {
+        var property escenario = "granja" 
     method position() = game.at(0, 0)
 
     method image() =
-        if (ciclo.esDia()) "MapaDia.gif"
-        else "MapaNoche.gif"
+        if (escenario == 'granja'){
+            if (ciclo.esDia()) "MapaDia.gif"
+            else "MapaNoche.gif"}
+
+        else if (escenario == 'pueblo'){
+                if (ciclo.esDia()) {"puebloDia.gif"}
+                else "pueblonoche.gif"  
+
+        }
+        else if (escenario == 'bosque'){
+                if (ciclo.esDia()) {"bosqueDia.gif"}
+                else "bosqueNoche.gif"            
+        }
+        else if( escenario == 'mina'){
+                'mina.gif'}
 }

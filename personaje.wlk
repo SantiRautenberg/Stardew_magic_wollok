@@ -1,46 +1,54 @@
+import navegacion.*
+import interacciones.*
 import plantas.*
 import wollok.game.*
 import mapa.*
 import herramientas.*
 import objetos.*
+import animacion.*
+import recetas.*
+import inventario.*
+import ciclo.*
+import escenarios.*
+import energia.*
+import mercado.*
+import combate.*
 
-
-//podemos hacerlo clase o objeto , si lo hacemos clase despues cada personaje va a tener su propio inventario
-/** Lista de cosas que lleva un personaje. */
-class Inventario {
-    var property items = []
-
-    method add(elemento) {
-        items.add(elemento)}
-
-    method remove(elemento) {
-        items.remove(elemento)}
-
-    method contains(elemento) {
-        return items.contains(elemento)}
-}
-
-
-/** Lo que tienen en comun todos los personajes: estadisticas, inventario y acciones basicas. */
 class Personaje {
     var property nombre = ""
     var property vida = 100
-    var property energia = 100
     var property hambre = 0
     var property dinero = 0
     const property inventario = new Inventario() 
+    const sistemaEnergia = new SistemaEnergia()
     const plantas = []
     const parcelas = []
 
+    method energia() = sistemaEnergia.energia()
+
     method dormir() {
-        energia = 100
+        sistemaEnergia.dormir()
+    }
+
+    method recibirDanio(cantidad) {
+        vida = 0.max(vida - cantidad)
+    }
+
+    method recuperarEnergia(cantidad) {
+        sistemaEnergia.recuperar(cantidad)
     }
     
-    //este lo puse asi pensando en que depende de que coma, es cuanta energia repone o cuanta hambre le saca
-    //obvio lo podemos cambiar a que no importe que coma , siempre repone lo mismo
+    method gastarEnergia(cantidad) {
+        sistemaEnergia.gastar(cantidad)
+    }
+
+    method estaCansado() {
+        return sistemaEnergia.estaCansado()
+    }
+    
     method comer(alimento) {
         hambre = 0.max(hambre - alimento.calorias())
-        energia = 100.min(energia + alimento.energiaQueAporta())
+        sistemaEnergia.recuperar(alimento.energiaQueAporta())
     }
     
     method agarrar(elemento) {
@@ -50,7 +58,6 @@ class Personaje {
         }
     }
 
-    //tendriamos que pasarle el precio por parametro o en dinero poner dinero += elemento.precio() y listo , total hay que hacer un objeto/clase elemento
     method vender(elemento, precio) {
         if (inventario.contains(elemento)) {
             inventario.remove(elemento)
@@ -60,7 +67,6 @@ class Personaje {
         }
     }
 
-    //lo mismo qu vender 
     method comprar(elemento, precio) {
         if (dinero >= precio) {
             dinero = dinero - precio
@@ -70,66 +76,64 @@ class Personaje {
         }
     }
 
+    method siHayEnergiaHacer(accion) {
+        if (self.estaCansado()) {
+            game.say(self, "¡Estoy demasiado cansado, necesito descansar!")
+        } else {
+            accion.apply()
+        }
+    }
+
    
 }
 
-/** El mago que maneja el jugador: se mueve con WASD y puede llevar una herramienta. */
 object principal inherits Personaje {
- 
+    var property casa = null
     var property obs = []
 
-    // --- posicion y direccion (abajo | arriba | izquierda | derecha) ---
-    var property position = game.at(11, 7)      // debajo de la puerta de la casa
+    var property position = game.at(11, 7)      
     var mirando = "abajo"
 
-    // --- animacion de caminata ---
-    const esperaEntrePasos = 120                // ms minimos entre un paso y otro
-    const framesDeCaminata = 4
-    var caminando = false
-    var frame = 1
-    var ultimoMovimiento = 0
+    // --- combate ---
+    const danioDelBaston = 1
+    const energiaPorAtaque = 2                  
+    const tiempoDeInvulnerabilidad = 1000       
+    var ultimoDanioRecibido = -10000
 
-    // --- herramienta en la mano (hacha | pala | azada | sinHerramienta) ---
-    const framesDeUso = 6
-    var property herramienta = sinHerramienta
-    var usando = false
-    var frameUso = 1
+    const animador = new Animador()
 
     method objetoEnMiPosicion() {
-    return game.getObjectsIn(position).find({ objeto => objeto != self })}
+    return game.getObjectsIn(position).find({ objeto => objeto != self })} 
 
-                                                                        
-    method image() =
-        if (usando) herramienta.imagenUsando(mirando, frameUso)
-        else if (caminando) herramienta.imagenCaminando(mirando, frame)
-        else herramienta.imagenQuieto(mirando)
+    method quedaobjeto(planta) = inventario.tieneUnidad(planta.nombreSemilla()) 
+    
 
     // ---------- animacion ----------
+    method image() = animador.imagen(mirando)
+
     method iniciarAnimacion() {
-        game.onTick(100, "personajeQuieto", { self.actualizarAnimacion() })
+        animador.iniciar()
     }
 
-    method actualizarAnimacion() {
-        if (usando) {
-            self.avanzarUso()
-        } else {
-            self.frenarSiDejoDeCaminar()
-        }
+    // ---------- herramientas ----------
+    method herramienta() = animador.herramienta()
+
+    method equipar(unaHerramienta) {
+        animador.equipar(unaHerramienta)
     }
 
-    method avanzarUso() {
-        if (frameUso < framesDeUso) {
-            frameUso += 1
-        } else {
-            usando = false
-            frameUso = 1
-        }
+    method guardarHerramienta() {
+        animador.equipar(sinHerramienta)
     }
 
-    method frenarSiDejoDeCaminar() {
-        if (caminando && game.currentTime() - ultimoMovimiento > 220) {
-            caminando = false
-            frame = 1
+    method interactuar() {
+        interaccionesMercado.interactuar(self)
+    }
+
+    method usarHerramienta() {
+        if (animador.puedeUsarHerramienta()) {
+            animador.empezarAUsarHerramienta()
+            self.herramienta().usar(self)
         }
     }
 
@@ -140,88 +144,203 @@ object principal inherits Personaje {
         else if (dir == "arriba") position.up(1)
         else position.down(1)
 
-    method puedeMoverse() = !usando && game.currentTime() - ultimoMovimiento >= esperaEntrePasos
-
     method mover(dir) {
-        if (self.puedeMoverse()) {
-            const ProximaDireccion = self.destino(dir)
+        if (animador.puedeDarUnPaso()) {
+            const proximaPosicion = self.destino(dir)
             mirando = dir
-            if (!obs.any({obstaculo => obstaculo.position() == ProximaDireccion})){
-            self.irA(self.destino(dir))
-            caminando = true
-            frame = if (frame == framesDeCaminata) 1 else frame + 1
-            ultimoMovimiento = game.currentTime()}
+            if (!self.hayObstaculoEn(proximaPosicion)) {
+                self.irA(proximaPosicion)
+                self.ingresarAcasa(proximaPosicion)
+                animador.darUnPaso()
+            }
         }
     }
 
-    /** Solo avanza si la celda esta dentro del mapa y no la bloquea nada. */
+    method hayObstaculoEn(posicion) = obs.any({ obstaculo => obstaculo.ocupa(posicion) })
+
     method irA(nuevaPosicion) {
         if (mapa.estaLibre(nuevaPosicion)) {
             position = nuevaPosicion
+            self.revisarSalida()
         }
     }
 
-    // ---------- herramientas ----------
-    method equipar(unaHerramienta) {
-        if (!usando) {
-            herramienta = unaHerramienta
-            caminando = false
-            frame = 1
+    method revisarSalida() {
+        navegacion.revisarSalida(self)
+    }
+
+    method minar() {
+        const enfrente = self.destino(mirando)
+
+        if (mapa.hayMineralEn(enfrente)) {
+            mapa.mineralEn(enfrente).serMinadoPor(self)
+        } else {
+            game.say(self, "No hay ningún mineral enfrente")
         }
     }
 
-    method guardarHerramienta() {
-        self.equipar(sinHerramienta)
-    }
-
-    /** Reproduce la animacion de talar / cavar / arar (todavia no modifica el mapa). */
-    method usarHerramienta() {
-        if (herramienta.sePuedeUsar() && !usando) {
-            usando = true
-            frameUso = 1
-            caminando = false
-        }
-    }
-
-    method minar(objeto) {
-        //por parametro el objeto a minar y ver cuanto de energia se le puede bajar
-    }
-
+    // ---------- combate (solo con el baston equipado: ver sinHerramienta.usar) ----------
     method pelear(enemigo) {
-        // depende del enemigo es cuanta vida le va a sacar
+        enemigo.recibirDanio(danioDelBaston)
+    }
+
+    method atacar() {
+        self.siHayEnergiaHacer({
+            self.gastarEnergia(energiaPorAtaque)
+            self.pelear(combate.enemigoEn(self.destino(mirando)))
+        })
+    }
+
+    method estaInvulnerable() = game.currentTime() - ultimoDanioRecibido < tiempoDeInvulnerabilidad
+
+    override method recibirDanio(cantidad) {
+        if (!self.estaInvulnerable()) {
+            super(cantidad)
+            ultimoDanioRecibido = game.currentTime()
+            if (self.vida() > 0) {
+                game.say(self, "¡Auch! -" + cantidad)
+            } else {
+                self.reaparecer()
+            }
+        }
+    }
+
+    method reaparecer() {
+        self.vida(100)
+        position = combate.entradaDelBosque()
+        animador.quedarseQuieto()
+        game.say(self, "Te derrotaron. Reapareces en la entrada")
+    }
+
+    method intentarTalar (){                  
+        const enfrente = self.destino(mirando)  
+   
+        if (mapa.hayArbolEn(enfrente)) {
+        self.talar(mapa.arbolEn(enfrente))
+    }
+    }
+
+    method talar(objeto) {
+        self.siHayEnergiaHacer({ 
+            const recurso = objeto.recurso()
+            if (hacha.mejorada() && objeto.admiteDobleRecurso() && 0.randomUpTo(1) < 0.5) {
+                recurso.cantidad(recurso.cantidad() * 2)
+            }
+            inventario.add(recurso)
+            obs.remove(objeto)              
+            mapa.quitar(objeto)             
+            granja.retirar(objeto)
+            self.gastarEnergia(5)
+        })
     }
 
     method cosechar(planta) {
-        //por paraemtro la planta a cosechar , un vez que la coseche se la guarda en el inventario?
+        self.siHayEnergiaHacer({
+            if (planta.sepuedecosechar()) {
+                const parcela = parcelas.find({parcela => parcela.position() == planta.position()})
+                parcela.planta(sinPlanta)           
+                inventario.add(planta.recurso())    
+                granja.retirar(planta)
+                self.gastarEnergia(5)
+            }
+        })
     }
-    method levantar(objeto) {
-    inventario.add(objeto.recurso())
-    game.removeVisual(objeto)
+    method levantar(objeto) {           
+        inventario.add(objeto.recurso())
+        granja.retirar(objeto)
     }
 
-     method parcelaActual() {
-      const parcela =  parcelas.find({parcela => parcela.position() == self.position()})
-
-      if(parcela == null) {
-        return sinParcela
-      } else {
-        return parcela
-      }
+    method parcelaActual() {
+        if (parcelas.any({ parcela => parcela.position() == self.position() })) {
+            return parcelas.find({ parcela => parcela.position() == self.position() })
+        } else {
+            return sinParcela
+        }
     }
+
+    method quitarParcela() {
+        const parcela = self.parcelaActual()
+        if (parcela != sinParcela) {
+            if (parcela.estaLibre()) {
+                parcela.desarmar()
+                parcelas.remove(parcela)
+            }
+        }
+    }
+    //=====resuelve el tema del topo=======
+     method visual_glitch(){
+      game.removeVisual(self)
+      game.addVisual(self)}
 
     method ponerParcela() {
-      const parcela = new Parcela (position = self.position())
-      parcelas.add(parcela)
-      game.addVisual(parcela)
+        if (fondo.escenario() == 'granja'){
+            self.siHayEnergiaHacer({
+                const parcela = new Parcela (position = self.position())
+                parcelas.add(parcela)
+                granja.registrar(parcela)
+                self.gastarEnergia(10)
+                game.addVisual(parcela)
+                self.visual_glitch()
+            })
+        }
     }
 
-    method plantar(planta) {
-      self.parcelaActual().sembrar(planta)
+method plantar(planta) {
+    if (fondo.escenario() == "granja") {
+        const parcela = self.parcelaActual()
+
+        if (parcela != sinParcela) { 
+            if (parcela.estaLibre() && self.quedaobjeto(planta)) {
+                self.siHayEnergiaHacer({
+                    parcela.sembrar(planta)
+                    inventario.descontar(planta.nombreSemilla(), 1)
+                    self.gastarEnergia(5)
+                    self.visual_glitch()
+                })
+            }
+        }
     }
+}
 
     method regar() {
       self.parcelaActual().regar()
     }
 
+    method preparar(receta) {
+        if (receta.puedePrepararse(inventario)){
+            receta.preparar(self)
+            game.say(self, "Prepare " + receta.pocion().nombre() + ". Energia: " + self.energia())
+        } else {
+            game.say(self, "Me faltan ingredientes")
+        }
+    }
+
+   // ----- DORMIR ----
+
+    method estaEnCasa(nuevaPos) {
+       return casa != null && casa.ocupa(nuevaPos)
+    }
+
+    method ingresarAcasa(nuevaPos) {
+        if (game.hasVisual(casa) && self.estaEnCasa(nuevaPos)) {
+            if (game.hasVisual(self)) {
+                game.removeVisual(self)
+                self.dormir()
+            }
+        } else {
+            if (!game.hasVisual(self)) {
+                game.addVisual(self)
+            }
+        } 
+    }
+
+    override method dormir() {
+        if (ciclo.esDeDia() && self.estaEnCasa(self.position())) {
+            game.say(self, "¡Aún es de día, hay mucho por hacer!")
+        }
+        if (!ciclo.esDeDia() && self.estaEnCasa(self.position())) {
+            super()
+        }
+    }
 
 }
